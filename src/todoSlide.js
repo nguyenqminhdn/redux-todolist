@@ -5,7 +5,11 @@ const todoSlide = createSlice({
     initialState: [],
     reducers: {
         add(state, action) {
-            state.todos.push(action.payload)
+            const todo = {
+                id: action.payload.id,
+                text: action.payload.text,
+            }
+            state.push(action.payload)
         },
         update(state, action) {
             const updatedTodo = state.todos.map(todo => {
@@ -16,8 +20,12 @@ const todoSlide = createSlice({
               });
             state.todos = updatedTodo
         },
-        delete(state, action) {
+        remove(state, action) {
             state.todos.filter(todo => todo.id != action.payload)
         }
     }
 })
+
+export const {add, update, remove} = todoSlide.actions;
+
+export default todoSlide.reducer;
